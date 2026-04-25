@@ -29,7 +29,10 @@ def validate_desktop_format(content):
 # ==========================================
 def sync_multiple_days_to_sheet(daily_summary):
     try:
-        gc = gspread.service_account(filename='creds.json')
+        #gc = gspread.service_account(filename='creds.json')
+        credentials_dict = dict(st.secrets["gcp_service_account"])
+        gc = gspread.service_account_from_dict(credentials_dict)
+
         # 你的試算表 ID
         spreadsheet_id = "1lQJ8bLUjcVBBSYL7t7C5WRuoN0JEP_ErMEmy4uaEq5c"
         sh = gc.open_by_key(spreadsheet_id)
